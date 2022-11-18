@@ -1,0 +1,17 @@
+
+*.exe
+cmake-build-debug/CMakeFiles/3.23.2/CompilerIdC/CMakeCCompilerId.c
+cmake-build-debug/CMakeFiles/3.23.2/CMakeSystem.cmake
+cmake-build-debug/CMakeFiles/3.23.2/CMakeDetermineCompilerABI_CXX.bin
+cmake-build-debug/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.cpp
+*.txt
+tempCodeRunnerFile.cpp
+cmake-build-debug/CMakeFiles/3.23.2/CMakeRCCompiler.cmake
+cmake-build-debug/CMakeFiles/CMakeOutput.log
+*.check_cache
+*.cmake
+*.json
+*.xml
+*.pb
+*.iml
+*.bin
