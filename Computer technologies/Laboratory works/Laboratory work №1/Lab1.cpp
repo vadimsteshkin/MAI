@@ -6,7 +6,7 @@ using namespace std;
 
 
 int main() {
-    setlocale(LC_ALL, "Rus");?
+    setlocale(LC_ALL, "Rus");
     int n; //количество просуммированных элементов
     double e, sum, Tsum, Diff, Znak; //Точность, сумма, точная сумма, модуль разницы между точной суммой и суммой, изменение знака
     cout << "Введите эпсилон \n";
