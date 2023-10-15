@@ -13,10 +13,10 @@ typedef float (*DataGeneratorFloatFull)(const char*, int, int, int, float*);
 typedef float (*DataGeneratorFloatPartly)(const char*, int, int, int, int, float*);
 
 
-const char* FNAME1[] = { "sluch.txt", "grow.txt", "decr.txt" };
-const char* FNAME2[] = { "pila.txt", "sin.txt", "stup.txt" };
-const char* FNAME3[] = { "sluchfloat.txt", "growfloat.txt", "decrfloat.txt" };
-const char* FNAME4[] = { "pilafloat.txt", "sinfloat.txt", "stupfloat.txt" };
+const char* FNAME1[] = { "files\\sluch.txt", "files\\grow.txt", "files\\decr.txt" };
+const char* FNAME2[] = { "files\\pila.txt", "files\\sin.txt", "files\\stup.txt" };
+const char* FNAME3[] = { "files\\sluchfloat.txt", "files\\growfloat.txt", "files\\decrfloat.txt" };
+const char* FNAME4[] = { "files\\pilafloat.txt", "files\\sinfloat.txt", "files\\stupfloat.txt" };
 
 
 
