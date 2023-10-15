@@ -13,43 +13,66 @@ typedef float (*DataGeneratorFloatFull)(const char*, int, int, int, float*);
 typedef float (*DataGeneratorFloatPartly)(const char*, int, int, int, int, float*);
 
 
-const char* FNAME1[] = { "sluch.txt", "vozr.txt", "ubyv.txt" };
+const char* FNAME1[] = { "sluch.txt", "grow.txt", "decr.txt" };
 const char* FNAME2[] = { "pila.txt", "sin.txt", "stup.txt" };
-const char* FNAME3[] = { "sluchfloat.txt", "vozrfloat.txt", "ubyvfloat.txt" };
+const char* FNAME3[] = { "sluchfloat.txt", "growfloat.txt", "decrfloat.txt" };
 const char* FNAME4[] = { "pilafloat.txt", "sinfloat.txt", "stupfloat.txt" };
+
 
 
 /*Генерирует случайную последовательность целых чисел в диапазоне от min до max. 
 Записывает эту последовательность в файл с именем, переданным в качестве аргумента FNAME.*/
 int Rand_Num(const char* FNAME, int n, int min, int max, int* data1);
+
+/*Генерирует случайную последовательность чисел с плавающей точкой в диапазоне от min до max. 
+Записывает эту последовательность в файл с именем, переданным в качестве аргумента FNAME.*/
 float Rand_Numfloat(const char* FNAME, int n, int min, int max, float* data3);
+
 /*Генерирует упорядоченную по возрастанию последовательность целых чисел в диапазоне от min до max. 
 Записывает эту последовательность в файл с именем, переданным в качестве аргумента FNAME.*/
 int Grow_Num(const char* FNAME, int n, int min, int max, int* data1);
+
+/*Генерирует упорядоченную по возрастанию последовательность чисел с плавающей точкой в диапазоне от min до max. 
+Записывает эту последовательность в файл с именем, переданным в качестве аргумента FNAME.*/
 float Grow_Numfloat(const char* FNAME, int n, int min, int max, float* data3);
+
 /*Генерирует упорядоченную по убыванию последовательность целых чисел в диапазоне от min до max.
  Записывает эту последовательность в файл с именем, переданным в качестве аргумента FNAME.*/
 int Decr_Num(const char* FNAME, int n, int min, int max, int* data1);
+
+/*Генерирует упорядоченную по убыванию последовательность чисел с плавающей точкой в диапазоне от min до max.
+ Записывает эту последовательность в файл с именем, переданным в качестве аргумента FNAME.*/
 float Decr_Numfloat(const char* FNAME, int n, int min, int max, float* data3);
+
 /*Генерирует "пилообразную" последовательность целых чисел, 
 в которой значения повторяются в интервалах заданной длины (interval) в диапазоне от min до max. 
 Записывает эту последовательность в файл с именем, переданным в качестве аргумента FNAME.*/
 int Saw_Num(const char* FNAME, int n, int min, int max, int interval, int* data2);
+
+/*Генерирует "пилообразную" последовательность чисел с плавающей точкой, 
+в которой значения повторяются в интервалах заданной длины (interval) в диапазоне от min до max. 
+Записывает эту последовательность в файл с именем, переданным в качестве аргумента FNAME.*/
 float Saw_Numfloat(const char* FNAME, int n, int min, int max, int interval, float* data4);
+
 /*Генерирует "синусоидальную" последовательность целых чисел, 
 в которой значения изменяются по синусоидальному закону в интервале от min до max с заданным интервалом interval. 
 Записывает эту последовательность в файл с именем, переданным в качестве аргумента FNAME.*/
 int Sin_Num(const char* FNAME, int n, int min, int max, int interval, int* data2);
+
+/*Генерирует "синусоидальную" последовательность чисел с плавающей точкой, 
+в которой значения изменяются по синусоидальному закону в интервале от min до max с заданным интервалом interval. 
+Записывает эту последовательность в файл с именем, переданным в качестве аргумента FNAME.*/
 float Sin_Numfloat(const char* FNAME, int n, int min, int max, int interval, float* data4);
-/*Генерирует "синусоидальную" последовательность целых чисел, 
+
+/*Генерирует "ступенчатую" последовательность целых чисел, 
 в которой значения изменяются по синусоидальному закону в интервале от min до max с заданным интервалом interval. 
 Записывает эту последовательность в файл с именем, переданным в качестве аргумента FNAME.*/
 int Stair_Num(const char* FNAME, int n, int min, int max, int interval, int* data2);
+
+/*Генерирует "ступенчатую" последовательность чисел c плавающей точкой, 
+в которой значения изменяются по синусоидальному закону в интервале от min до max с заданным интервалом interval. 
+Записывает эту последовательность в файл с именем, переданным в качестве аргумента FNAME.*/
 float Stair_Numfloat(const char* FNAME, int n, int min, int max, int interval, float* data4);
-
-
-
-
 
 
 int main()
