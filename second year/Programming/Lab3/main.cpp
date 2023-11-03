@@ -56,14 +56,14 @@ void cocktailSort(std::vector<int>& arr) {
 
 int main() 
 {
-    std::vector<int> data = { };
-    for (int size :  {
-        std::vector<int> data(size);
-        int key = data[size / 2]; // Ключ ищется в центре
+    srand(time(0));
+    vector<int> sortedArray;
+    vector<int> unsortedArray;
 
-        for (int i = 0; i < size; ++i) {
-            data[i] = rand() % size;
-        }
+    for (int i = 0; i < 200000; i++) {
+        int num = rand();
+        unsortedArray.push_back(num);
+    }
     cocktailSort(random_array);
     shellSort(random_array);
     // Выведите массив на каждом промежуточном этапе сортировки и сравните счетчики сравнений и пересылок

@@ -4,6 +4,10 @@
 #include <fstream>
 #include <cmath>
 #include <chrono>
+#include <stdio.h>
+#include <intrin.h>
+
+#pragma intrinsic(__rdtsc)
 
 using namespace std;
 
@@ -90,29 +94,47 @@ int main()
 	for (int i = 0; i < 3; i++)
 	{
 		int data1[1000];
+		unsigned __int64  start= __rdtsc();
 		dataGeneratorsIntFull[i](FNAME1[i], n, min, max, data1);
+		unsigned __int64  end= __rdtsc();
+        double duration = double(end - start) / 10000000;
+		cout<<duration<<fixed<<'s'<<endl;
 	}
 	for (int i = 0; i < 3; i++)
 	{
 		int data2[1000];
+		unsigned __int64  start= __rdtsc();
+	
 		dataGeneratorsIntPartly[i](FNAME2[i], n, min, max, interval, data2);
+		unsigned __int64  end= __rdtsc();
+        double duration = double(end - start) / 10000000;
+		cout<<duration<<fixed<<'s'<<endl;
 	}
 	cout << "Числа с плавающей запятой" << endl;
 	for (int i = 0; i < 3; i++)
 	{
 		float data3[1000];
+		unsigned __int64  start= __rdtsc();
 		dataGeneratorsFloatFull[i](FNAME3[i], n, min, max, data3);
+		unsigned __int64  end= __rdtsc();
+        double duration = double(end - start) / 10000000;
+		cout<<duration<<fixed<<'s'<<endl;
 	}
 	for (int i = 0; i < 3; i++)
 	{
 		float data4[1000];
+		unsigned __int64  start= __rdtsc();
 		dataGeneratorsFloatPartly[i](FNAME4[i], n, min, max, interval, data4);
+		unsigned __int64  end= __rdtsc();
+        double duration = double(end - start) / 10000000;
+		cout<<duration<<fixed<<'s'<<endl;
 	}
 	return 0;
 }
 
 int Rand_Num(const char* FNAME, int n, int min, int max, int* data1)
 {
+	
 	ofstream fout(FNAME);
 	srand(time(NULL));
 	cout << "Случайная последовательность" << endl;

@@ -3,10 +3,17 @@
 #include <cstdlib>
 #include <vector>
 #include <algorithm>
+#include <chrono>
+#include <stdio.h>
+#include <intrin.h>
+
+#pragma intrinsic(__rdtsc)
+
 
 using namespace std;
 
 int binarySearch(const vector<int>& arr, int key, int& comparisons) {
+    
     int left = 0;
     int right = arr.size() - 1;
     
@@ -69,6 +76,7 @@ int binarySearchSorted(const vector<int>& arr, int key, int& comparisons) {
 }
 
 int main() {
+    unsigned __int64 start,end;
     srand(time(0));
     vector<int> sortedArray;
     vector<int> unsortedArray;
@@ -89,34 +97,34 @@ int main() {
         vector<int> subArray(sortedArray.begin(), sortedArray.begin() + size);
 
         int comparisonsBLS = 0;
-        clock_t startBLS = clock();
+        unsigned __int64  startBLS= __rdtsc();
         int resultBLS = binarySearch(subArray, searchKey, comparisonsBLS);
-        clock_t endBLS = clock();
-        double durationBLS = double(endBLS - startBLS) / CLOCKS_PER_SEC;
+         unsigned __int64 endBLS = __rdtsc();
+        double durationBLS = double(endBLS - startBLS) / 10000000;
 
         int comparisonsSLS = 0;
-        clock_t startSLS = clock();
+        unsigned __int64  startSLS= __rdtsc();
         int resultSLS = linearSearch(subArray, searchKey, comparisonsSLS);
-        clock_t endSLS = clock();
-        double durationSLS = double(endSLS - startSLS) / CLOCKS_PER_SEC;
+        unsigned __int64  endSLS= __rdtsc();
+        double durationSLS = double(endSLS - startSLS) / 10000000;
 
         int comparisonsOAS = 0;
-        clock_t startOAS = clock();
+        unsigned __int64  startOAS= __rdtsc();
         int resultOAS = ordinaryArraySearch(subArray, searchKey, comparisonsOAS);
-        clock_t endOAS = clock();
-        double durationOAS = double(endOAS - startOAS) / CLOCKS_PER_SEC;
+        unsigned __int64  endOAS= __rdtsc();
+        double durationOAS = double(endOAS - startOAS) / 10000000;
 
         int comparisonsBS = 0;
-        clock_t startBS = clock();
+        unsigned __int64  startBS= __rdtsc();
         int resultBS = binarySearchSorted(subArray, searchKey, comparisonsBS);
-        clock_t endBS = clock();
-        double durationBS = double(endBS - startBS) / CLOCKS_PER_SEC;
+        unsigned __int64  endBS= __rdtsc();
+        double durationBS = double(endBS - startBS) / 10000000;
 
         cout << "Size: " << size << endl;
-        cout << "BLS: Time - " << durationBLS << "s, Comparisons - " << comparisonsBLS << endl;
-        cout << "SLS: Time - " << durationSLS << "s, Comparisons - " << comparisonsSLS << endl;
-        cout << "OAS: Time - " << durationOAS << "s, Comparisons - " << comparisonsOAS << endl;
-        cout << "BS: Time - " << durationBS << "s, Comparisons - " << comparisonsBS << endl;
+        cout << "BLS: Time - " << durationBLS <<fixed<< "s, Comparisons - " << comparisonsBLS << endl;
+        cout << "SLS: Time - " << durationSLS <<fixed<< "s, Comparisons - " << comparisonsSLS << endl;
+        cout << "OAS: Time - " << durationOAS <<fixed<< "s, Comparisons - " << comparisonsOAS << endl;
+        cout << "BS: Time - " << durationBS <<fixed<< "s, Comparisons - " << comparisonsBS << endl;
         cout << "-----------------------------------------" << endl;
     }
 
