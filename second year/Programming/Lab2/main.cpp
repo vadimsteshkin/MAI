@@ -49,7 +49,7 @@ int ordinaryArraySearch(const vector<int>& arr, int key, int& comparisons) {
         if (arr[i] == key) {
             return i;
         } else if (arr[i] > key) {
-            break; // Так как массив отсортирован по неубыванию, можно прекратить поиск
+            break; // РўР°Рє РєР°Рє РјР°СЃСЃРёРІ РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅ РїРѕ РЅРµСѓР±С‹РІР°РЅРёСЋ, РјРѕР¶РЅРѕ РїСЂРµРєСЂР°С‚РёС‚СЊ РїРѕРёСЃРє
         }
     }
     
