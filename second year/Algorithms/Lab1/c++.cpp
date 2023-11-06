@@ -127,8 +127,16 @@ int main() {
     // Инициализация графа (здесь нужно заполнить граф своими данными)
     // Пример:
     graph[0].emplace_back(0, 1, 5);
-    graph[0].emplace_back(0, 2, 3);
-    // ...
+    graph[0].emplace_back(1, 2, 3);
+    graph[0].emplace_back(1, 3, 5);
+    graph[0].emplace_back(2, 3, 3);
+    graph[0].emplace_back(3, 4, 5);
+    graph[0].emplace_back(5, 2, 5);
+    graph[0].emplace_back(5, 3, 3);
+    graph[0].emplace_back(3, 5, 5);
+    graph[0].emplace_back(4, 2, 3);
+    graph[0].emplace_back(0, 6, 5);
+
 
     // Вызов алгоритма Дейкстры
     int start_vertex = 0;

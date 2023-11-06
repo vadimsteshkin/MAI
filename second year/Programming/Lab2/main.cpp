@@ -90,42 +90,47 @@ int main() {
     sort(sortedArray.begin(), sortedArray.end());
 
     int sizes[] = {10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000};
-    int searchKey = sortedArray[0];
+    int keys[]={16,9000,18990};
 
-    for (int i = 0; i < 10; i++) {
-        int size = sizes[i];
-        vector<int> subArray(sortedArray.begin(), sortedArray.begin() + size);
+    for (int key=0; key<3; key++)
+    {
+        cout<<"Для ключа в индексе: "<<keys[key]<<endl;
+        for (int i = 0; i < 10; i++) 
+        {
+            int size = sizes[i];
+            vector<int> subArray(sortedArray.begin(), sortedArray.begin() + size);
 
-        int comparisonsBLS = 0;
-        unsigned __int64  startBLS= __rdtsc();
-        int resultBLS = binarySearch(subArray, searchKey, comparisonsBLS);
-         unsigned __int64 endBLS = __rdtsc();
-        double durationBLS = double(endBLS - startBLS) / 10000000;
+            int comparisonsBLS = 0;
+            unsigned __int64  startBLS= __rdtsc();
+            int resultBLS = binarySearch(subArray, keys[key], comparisonsBLS);
+            unsigned __int64 endBLS = __rdtsc();
+            double durationBLS = double(endBLS - startBLS) / 10000000;
 
-        int comparisonsSLS = 0;
-        unsigned __int64  startSLS= __rdtsc();
-        int resultSLS = linearSearch(subArray, searchKey, comparisonsSLS);
-        unsigned __int64  endSLS= __rdtsc();
-        double durationSLS = double(endSLS - startSLS) / 10000000;
+            int comparisonsSLS = 0;
+            unsigned __int64  startSLS= __rdtsc();
+            int resultSLS = linearSearch(subArray, keys[key], comparisonsSLS);
+            unsigned __int64  endSLS= __rdtsc();
+            double durationSLS = double(endSLS - startSLS) / 10000000;
 
-        int comparisonsOAS = 0;
-        unsigned __int64  startOAS= __rdtsc();
-        int resultOAS = ordinaryArraySearch(subArray, searchKey, comparisonsOAS);
-        unsigned __int64  endOAS= __rdtsc();
-        double durationOAS = double(endOAS - startOAS) / 10000000;
+            int comparisonsOAS = 0;
+            unsigned __int64  startOAS= __rdtsc();
+            int resultOAS = ordinaryArraySearch(subArray, keys[key], comparisonsOAS);
+            unsigned __int64  endOAS= __rdtsc();
+            double durationOAS = double(endOAS - startOAS) / 10000000;
 
-        int comparisonsBS = 0;
-        unsigned __int64  startBS= __rdtsc();
-        int resultBS = binarySearchSorted(subArray, searchKey, comparisonsBS);
-        unsigned __int64  endBS= __rdtsc();
-        double durationBS = double(endBS - startBS) / 10000000;
+            int comparisonsBS = 0;
+            unsigned __int64  startBS= __rdtsc();
+            int resultBS = binarySearchSorted(subArray, keys[key], comparisonsBS);
+            unsigned __int64  endBS= __rdtsc();
+            double durationBS = double(endBS - startBS) / 10000000;
 
-        cout << "Size: " << size << endl;
-        cout << "BLS: Time - " << durationBLS <<fixed<< "s, Comparisons - " << comparisonsBLS << endl;
-        cout << "SLS: Time - " << durationSLS <<fixed<< "s, Comparisons - " << comparisonsSLS << endl;
-        cout << "OAS: Time - " << durationOAS <<fixed<< "s, Comparisons - " << comparisonsOAS << endl;
-        cout << "BS: Time - " << durationBS <<fixed<< "s, Comparisons - " << comparisonsBS << endl;
-        cout << "-----------------------------------------" << endl;
+            cout << "Size: " << size << endl;
+            cout << "BLS: Time - " << durationBLS <<fixed<< "s, Comparisons - " << comparisonsBLS << endl;
+            cout << "SLS: Time - " << durationSLS <<fixed<< "s, Comparisons - " << comparisonsSLS << endl;
+            cout << "OAS: Time - " << durationOAS <<fixed<< "s, Comparisons - " << comparisonsOAS << endl;
+            cout << "BS: Time - " << durationBS <<fixed<< "s, Comparisons - " << comparisonsBS << endl;
+            cout << "-----------------------------------------" << endl;
+        }
     }
 
     return 0;
