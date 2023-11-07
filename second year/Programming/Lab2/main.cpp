@@ -14,8 +14,6 @@ using namespace std;
 
 int betterlinerSearch(const vector<int>& arr, int key, int& comparisons, int& comparisons_i) {
     int size=arr.size();
-    int cnt_i = 0;//Кол-во сравнений в цикле
-	int cnt = 0;//Кол-во сравнений с ключом
 	for (int i = 0; i < size; i++) //Цикл алгоритма поиска
 	{
 		comparisons_i++;
@@ -23,8 +21,8 @@ int betterlinerSearch(const vector<int>& arr, int key, int& comparisons, int& co
 		{
 			cout << "Индекс равен: " << i << endl;
 			comparisons++;
-			cout << "Кол-во сравнений с ключом: " << cnt << endl;
-			cout << "Кол-во сравнений в цикле: " << cnt_i << endl;
+			cout << "Кол-во сравнений с ключом: " << comparisons<< endl;
+			cout << "Кол-во сравнений в цикле: " <<  comparisons_i<< endl;
 			return i;
 		}
 		else
@@ -47,9 +45,6 @@ int linearSearch(const vector<int>& arr, int key, int& comparisons) {
         i++;
         comparisons++;
     }
-    if (arrCopy[size - 1] == key) {
-        comparisons++;
-    }
     arrCopy[size - 1] = last;
     if ((i < size - 1) or ((arrCopy[size - 1]) == key)) // Вывод индекса
     {
@@ -60,14 +55,26 @@ int linearSearch(const vector<int>& arr, int key, int& comparisons) {
 
 int ordinaryArraySearch(const vector<int>& arr, int key) 
 {
-    for (int i = 0; i < arr.size(); i++) {
-        if (arr[i] == key) {
-            return i;
-        } else if (arr[i] > key) {
-            break; // Так как массив отсортирован по неубыванию, можно прекратить поиск
-        }
-    }
-    
+    vector<int> arrCopy = arr;
+    int size=arr.size();
+    int last = arrCopy[size - 1];//Последнее значение
+	arrCopy[size - 1] = LLONG_MAX;
+	int i = 0;//Индекс
+	while (key > arr[i])//Сравнение элемента массива с ключом 
+	{
+		i++;
+	}
+	arrCopy[size - 1] = last;//Концу массива присваиваем обратно последний элемент
+	if (key == arr[i])//Вывод индекса
+	{
+		cout << "Индекс равен: " << i << endl;
+		return i;
+	}
+	if (key== arrCopy[size - 1])
+	{
+		cout << "Индекс равен: " << size - 1 << endl;
+		return size - 1;
+	}
     return -1;
 }
 

@@ -23,7 +23,8 @@ vector<int> Dijkstra(vector<vector<Edge>>& graph, int start) {
     dist[start] = 0;
 
     for (int i = 0; i < n - 1; i++) {
-        for (const Edge& edge : graph[i]) {
+        for (const Edge& edge : graph[i]) 
+        {
             if (dist[edge.from] < INF && dist[edge.to] > dist[edge.from] + edge.weight) {
                 dist[edge.to] = dist[edge.from] + edge.weight;
                 prev[edge.to] = edge.from;
@@ -37,9 +38,7 @@ vector<int> Dijkstra(vector<vector<Edge>>& graph, int start) {
 int main() {
     int n = 10; // Количество вершин
     vector<vector<Edge>> graph(n);
-
-    // Инициализация графа (здесь нужно заполнить граф своими данными)
-    // Пример:
+    // Инициализация графа
     graph[0].emplace_back(0, 9, 5);
     graph[0].emplace_back(0, 2, 3);
     graph[0].emplace_back(0, 7, 4);
@@ -59,8 +58,6 @@ int main() {
     graph[5].emplace_back(5, 4, 1);
     graph[6].emplace_back(6, 3, 4);
     graph[6].emplace_back(6, 8, 1);
-    graph[7].emplace_back(7, 5, 5);
-    graph[7].emplace_back(7, 0, 2);
     graph[7].emplace_back(7, 8, 5);
     graph[8].emplace_back(8, 2, 3);
     graph[8].emplace_back(8, 3, 2);

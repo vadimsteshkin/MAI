@@ -82,7 +82,7 @@ float Stair_Numfloat(const char* FNAME, int n, int min, int max, int interval, f
 int main()
 {
 	setlocale(LC_ALL, "RUSSIAN");
-	const int n = 50*10000000;
+	const int n = 200;
 	int min = 10;
 	int max = 1000;
 	int interval = 20;
@@ -208,8 +208,8 @@ int Sin_Num(const char* FNAME, int n, int min, int max, int interval, int* data2
 	for (int i = 0; i < n; i++)
 	{
 		data2[i] = min + ((max - min) / 2) * (1 + sin(i * 2 * M_PI / interval));
-		//fout << data2[i] << endl;
-		//cout << data2[i] << " ";
+		fout << data2[i] << endl;
+		cout << data2[i] << " ";
 	}
 	cout << endl;
 	fout.close();
@@ -225,8 +225,8 @@ int Stair_Num(const char* FNAME, int n, int min, int max, int interval, int* dat
 	while (i < n)
 	{
 		data2[i] = k;
-		//fout << data2[i] << endl;
-		//cout << data2[i] << " ";
+		fout << data2[i] << endl;
+		cout << data2[i] << " ";
 		if (j < interval)
 		{
 			j++;
@@ -250,8 +250,8 @@ float Rand_Numfloat(const char* FNAME, int n, int min, int max, float* data3)
 	for (int i = 0; i < n; i++)
 	{
 		data3[i] = min + rand() / float(RAND_MAX)*(max-min+1);
-		//fout << data3[i] << endl;
-		//cout << data3[i] << " ";
+		fout << data3[i] << endl;
+		cout << data3[i] << " ";
 	}
 	cout << endl;
 	fout.close();
@@ -264,8 +264,8 @@ float Grow_Numfloat(const char* FNAME, int n, int min, int max, float* data3)
 	for (int i = 0; i < n; i++)
 	{
 		data3[i] = (double(max - min)) / n * i + min;
-		//fout << data3[i] << endl;
-		//cout << data3[i] << " ";
+		fout << data3[i] << endl;
+		cout << data3[i] << " ";
 	}
 	cout << endl;
 	fout.close();
@@ -278,8 +278,8 @@ float Decr_Numfloat(const char* FNAME, int n, int min, int max, float* data3)
 	for (int i = 0; i < n; i++)
 	{
 		data3[i] = max-(double(max - min)) / n * i ;
-		//fout << data3[i] << endl;
-		//cout << data3[i] << " ";
+		fout << data3[i] << endl;
+		cout << data3[i] << " ";
 	}
 	cout << endl;
 	fout.close();
@@ -294,8 +294,8 @@ float Saw_Numfloat(const char* FNAME, int n, int min, int max, int interval, flo
 	while (i < n)
 	{
 		data4[i] = (double(max - min)) / interval * j + min;
-		//fout << data4[i] << endl;
-		//cout << data4[i] << " ";
+		fout << data4[i] << endl;
+		cout << data4[i] << " ";
 		if (j < interval)
 		{
 			j++;
@@ -317,8 +317,8 @@ float Sin_Numfloat(const char* FNAME, int n, int min, int max, int interval, flo
 	for (int i = 0; i < n; i++)
 	{
 		data4[i] =min + ((max-min)/2) * (1 + sin(i * 2 * M_PI / interval));
-		//fout << data4[i] << endl;
-		//cout << data4[i] << " ";
+		fout << data4[i] << endl;
+		cout << data4[i] << " ";
 	}
 	cout << endl;
 	fout.close();
@@ -334,8 +334,8 @@ float Stair_Numfloat(const char* FNAME, int n, int min, int max, int interval, f
 	while (i < n)
 	{
 		data4[i] = k;
-		//fout << data4[i] << endl;
-		//cout << data4[i] << " ";
+		fout << data4[i] << endl;
+		cout << data4[i] << " ";
 		if (j < interval)
 		{
 			j++;

@@ -18,7 +18,7 @@ void printArray(vector<int>& arr){
 }
 void shellSort(vector<int>& arr, int& comparisons) 
 {
-    //cout<<"Сортировка Шелла"<<endl;
+    cout<<"Сортировка Шелла"<<endl;
     int n = arr.size();
     int gap = n / 2;
 
@@ -35,17 +35,16 @@ void shellSort(vector<int>& arr, int& comparisons)
             comparisons++;
 
             arr[j] = temp;
-            //printArray(arr);
+            printArray(arr);
         }
         gap /= 2;
     }
-    //cout<<"Сортировка Шелла"<<endl;
-    //printArray(arr);
+    printArray(arr);
 }
 
 void cocktailSort(vector<int>& arr, long long& comparisons) {
     int n = arr.size();
-    //cout<<"Коктельная сортировка"<<endl;
+    cout<<"Коктельная сортировка"<<endl;
     bool swapped = true;
     int start = 0;
     int end = n - 1;
@@ -59,7 +58,7 @@ void cocktailSort(vector<int>& arr, long long& comparisons) {
                 swap(arr[i], arr[i + 1]);
                 swapped = true;
                 
-                //printArray(arr);
+                printArray(arr);
             }
         }
         if (!swapped) {
@@ -74,19 +73,19 @@ void cocktailSort(vector<int>& arr, long long& comparisons) {
                 swap(arr[i], arr[i - 1]);
                 swapped = true;
                 
-                //printArray(arr);
+                printArray(arr);
             }
         }
         start++;
     }
-    //cout<<"Коктельная сортировка"<<endl;
+
     
 }
 
 int main() 
 {
-    //vector<int> lengths={15};
-    vector<int> lengths={1000, 10000, 50000, 100000 };
+    vector<int> lengths={10};
+    //vector<int> lengths={1000, 10000, 50000, 100000 };
     for (int j=0;j<lengths.size();j++)
     {
         int n=lengths[j];
@@ -109,8 +108,8 @@ int main()
         sort(reverseSortedArray.begin(), reverseSortedArray.end(),greater<>());
 
 
-       //cout<<"Массив"<<endl;
-        //printArray(reverseSortedArray);
+        cout<<"Массив"<<endl;
+        printArray(reverseSortedArray);
 
         vector<int> ArrayCopy = Array;
         vector<int> sortedArrayCopy = sortedArray;
