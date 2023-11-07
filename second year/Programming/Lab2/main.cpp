@@ -12,40 +12,55 @@
 
 using namespace std;
 
-int binarySearch(const vector<int>& arr, int key, int& comparisons) {
+int betterlinerSearch(const vector<int>& arr, int key, int& comparisons, int& comparisons_i) {
+    int size=arr.size();
+    int cnt_i = 0;//Кол-во сравнений в цикле
+	int cnt = 0;//Кол-во сравнений с ключом
+	for (int i = 0; i < size; i++) //Цикл алгоритма поиска
+	{
+		comparisons_i++;
+		if (arr[i] == key) //Сравнение с ключом
+		{
+			cout << "Индекс равен: " << i << endl;
+			comparisons++;
+			cout << "Кол-во сравнений с ключом: " << cnt << endl;
+			cout << "Кол-во сравнений в цикле: " << cnt_i << endl;
+			return i;
+		}
+		else
+		{
+			comparisons++;
+		}
     
-    int left = 0;
-    int right = arr.size() - 1;
-    
-    while (left <= right) {
-        int mid = left + (right - left) / 2;
-        comparisons++;
-        if (arr[mid] == key) {
-            return mid;
-        } else if (arr[mid] < key) {
-            left = mid + 1;
-        } else {
-            right = mid - 1;
-        }
     }
-    
-    return -1;
+    return 0;
 }
 
 int linearSearch(const vector<int>& arr, int key, int& comparisons) {
-    for (int i = 0; i < arr.size(); i++) {
+    vector<int> arrCopy = arr; 
+    int size = arrCopy.size();
+    int last = arrCopy[size - 1]; // Последнее значение
+    arrCopy[size - 1] = key; // Значение последнего члена массива
+    int i = 0; // Индекс
+    while (arrCopy[i] != key) // Сравнение элемента массива с ключом
+    {
+        i++;
         comparisons++;
-        if (arr[i] == key) {
-            return i;
-        }
     }
-    
+    if (arrCopy[size - 1] == key) {
+        comparisons++;
+    }
+    arrCopy[size - 1] = last;
+    if ((i < size - 1) or ((arrCopy[size - 1]) == key)) // Вывод индекса
+    {
+        cout << "Индекс равен: " << i << endl;
+    }
     return -1;
 }
 
-int ordinaryArraySearch(const vector<int>& arr, int key, int& comparisons) {
+int ordinaryArraySearch(const vector<int>& arr, int key) 
+{
     for (int i = 0; i < arr.size(); i++) {
-        comparisons++;
         if (arr[i] == key) {
             return i;
         } else if (arr[i] > key) {
@@ -56,13 +71,13 @@ int ordinaryArraySearch(const vector<int>& arr, int key, int& comparisons) {
     return -1;
 }
 
-int binarySearchSorted(const vector<int>& arr, int key, int& comparisons) {
+int binarySearchSorted(const vector<int>& arr, int key) 
+{
     int left = 0;
     int right = arr.size() - 1;
     
     while (left <= right) {
         int mid = left + (right - left) / 2;
-        comparisons++;
         if (arr[mid] == key) {
             return mid;
         } else if (arr[mid] < key) {
@@ -99,35 +114,39 @@ int main() {
             int size = sizes[i];
             vector<int> subArray(sortedArray.begin(), sortedArray.begin() + size);
 
+
             int comparisonsBLS = 0;
+            int comparisonsBLS_i = 0;
             unsigned __int64  startBLS= __rdtsc();
-            int resultBLS = binarySearch(subArray, keys[key], comparisonsBLS);
+            int resultBLS = betterlinerSearch(unsortedArray, keys[key], comparisonsBLS, comparisonsBLS_i);
             unsigned __int64 endBLS = __rdtsc();
             double durationBLS = double(endBLS - startBLS) / 10000000;
 
+
             int comparisonsSLS = 0;
+            int comparisonsSLS_i = 0;
             unsigned __int64  startSLS= __rdtsc();
-            int resultSLS = linearSearch(subArray, keys[key], comparisonsSLS);
+            int resultSLS = linearSearch(unsortedArray, keys[key], comparisonsSLS);
             unsigned __int64  endSLS= __rdtsc();
             double durationSLS = double(endSLS - startSLS) / 10000000;
 
-            int comparisonsOAS = 0;
+
             unsigned __int64  startOAS= __rdtsc();
-            int resultOAS = ordinaryArraySearch(subArray, keys[key], comparisonsOAS);
+            int resultOAS = ordinaryArraySearch(subArray, keys[key]);
             unsigned __int64  endOAS= __rdtsc();
             double durationOAS = double(endOAS - startOAS) / 10000000;
 
-            int comparisonsBS = 0;
+            
             unsigned __int64  startBS= __rdtsc();
-            int resultBS = binarySearchSorted(subArray, keys[key], comparisonsBS);
+            int resultBS = binarySearchSorted(subArray, keys[key]);
             unsigned __int64  endBS= __rdtsc();
             double durationBS = double(endBS - startBS) / 10000000;
 
             cout << "Size: " << size << endl;
-            cout << "BLS: Time - " << durationBLS <<fixed<< "s, Comparisons - " << comparisonsBLS << endl;
+            cout << "BLS: Time - " << durationBLS <<fixed<< "s, Comparisons - " << comparisonsBLS <<", "<<comparisonsBLS_i<< endl;
             cout << "SLS: Time - " << durationSLS <<fixed<< "s, Comparisons - " << comparisonsSLS << endl;
-            cout << "OAS: Time - " << durationOAS <<fixed<< "s, Comparisons - " << comparisonsOAS << endl;
-            cout << "BS: Time - " << durationBS <<fixed<< "s, Comparisons - " << comparisonsBS << endl;
+            cout << "OAS: Time - " << durationOAS <<fixed<< "s" << endl;
+            cout << "BS: Time - " << durationBS <<fixed<< "s" << endl;
             cout << "-----------------------------------------" << endl;
         }
     }
