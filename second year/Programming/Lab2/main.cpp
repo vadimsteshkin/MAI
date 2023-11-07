@@ -76,7 +76,6 @@ int binarySearchSorted(const vector<int>& arr, int key, int& comparisons) {
 }
 
 int main() {
-    unsigned __int64 start,end;
     srand(time(0));
     vector<int> sortedArray;
     vector<int> unsortedArray;
