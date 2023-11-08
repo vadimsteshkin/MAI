@@ -19,10 +19,7 @@ int betterlinerSearch(const vector<int>& arr, int key, int& comparisons, int& co
 		comparisons_i++;
 		if (arr[i] == key) //Сравнение с ключом
 		{
-			cout << "Индекс равен: " << i << endl;
 			comparisons++;
-			cout << "Кол-во сравнений с ключом: " << comparisons<< endl;
-			cout << "Кол-во сравнений в цикле: " <<  comparisons_i<< endl;
 			return i;
 		}
 		else
@@ -48,7 +45,7 @@ int linearSearch(const vector<int>& arr, int key, int& comparisons) {
     arrCopy[size - 1] = last;
     if ((i < size - 1) or ((arrCopy[size - 1]) == key)) // Вывод индекса
     {
-        cout << "Индекс равен: " << i << endl;
+        return i;
     }
     return -1;
 }
@@ -67,12 +64,10 @@ int ordinaryArraySearch(const vector<int>& arr, int key)
 	arrCopy[size - 1] = last;//Концу массива присваиваем обратно последний элемент
 	if (key == arr[i])//Вывод индекса
 	{
-		cout << "Индекс равен: " << i << endl;
 		return i;
 	}
 	if (key== arrCopy[size - 1])
 	{
-		cout << "Индекс равен: " << size - 1 << endl;
 		return size - 1;
 	}
     return -1;
@@ -93,7 +88,8 @@ int binarySearchSorted(const vector<int>& arr, int key)
             right = mid - 1;
         }
     }
-    
+
+
     return -1;
 }
 
@@ -126,6 +122,9 @@ int main() {
             int comparisonsBLS_i = 0;
             unsigned __int64  startBLS= __rdtsc();
             int resultBLS = betterlinerSearch(unsortedArray, keys[key], comparisonsBLS, comparisonsBLS_i);
+            cout << "Индекс равен: " << resultBLS << endl;
+			cout << "Кол-во сравнений с ключом: " << comparisonsBLS<< endl;
+			cout << "Кол-во сравнений в цикле: " <<  comparisonsBLS_i<< endl;
             unsigned __int64 endBLS = __rdtsc();
             double durationBLS = double(endBLS - startBLS) / 10000000;
 
@@ -134,12 +133,14 @@ int main() {
             int comparisonsSLS_i = 0;
             unsigned __int64  startSLS= __rdtsc();
             int resultSLS = linearSearch(unsortedArray, keys[key], comparisonsSLS);
+            cout << "Индекс равен: " << resultSLS << endl;
             unsigned __int64  endSLS= __rdtsc();
             double durationSLS = double(endSLS - startSLS) / 10000000;
 
 
             unsigned __int64  startOAS= __rdtsc();
             int resultOAS = ordinaryArraySearch(subArray, keys[key]);
+            cout << "Индекс равен: " << resultOAS << endl;
             unsigned __int64  endOAS= __rdtsc();
             double durationOAS = double(endOAS - startOAS) / 10000000;
 
