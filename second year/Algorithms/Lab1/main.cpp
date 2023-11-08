@@ -9,21 +9,24 @@ using namespace std;
 const int INF = INT_MAX; // Бесконечность
 
 // Структура для представления ребра графа
-struct Edge {
+struct Edge
+{
     int from, to, weight;
 
     Edge(int f, int t, int w) : from(f), to(t), weight(w) {}
 };
 
 // Функция для поиска кратчайших путей в графе с использованием алгоритма Дейкстры
-vector<int> Dijkstra(vector<vector<Edge>>& graph, int start) {
+vector<int> Dijkstra(vector<vector<Edge>>& graph, int start)
+{
     int n = graph.size();
     vector<int> dist(n, INF); // Массив расстояний
     vector<int> prev(n, -1); // Массив для предшествующих вершин
     dist[start] = 0;
 
-    for (int i = 0; i < n - 1; i++) {
-        for (const Edge& edge : graph[i]) 
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (const Edge& edge : graph[i])
         {
             if (dist[edge.from] < INF && dist[edge.to] > dist[edge.from] + edge.weight) {
                 dist[edge.to] = dist[edge.from] + edge.weight;
@@ -35,7 +38,8 @@ vector<int> Dijkstra(vector<vector<Edge>>& graph, int start) {
     return prev;
 }
 
-int main() {
+int main()
+{
     int n = 10; // Количество вершин
     vector<vector<Edge>> graph(n);
     // Инициализация графа
@@ -71,18 +75,22 @@ int main() {
 
     // Вывод кратчайших путей и предшествующих вершин
     cout << "Кратчайшие пути с использованием алгоритма Дейкстры:" << endl;
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++)
+    {
         cout << "Кратчайший путь от вершины " << start_vertex << " до вершины " << i << ": ";
         int current = i;
         stack<int> path;
-        while (current != -1) {
+        while (current != -1)
+        {
             path.push(current);
             current = prevDijkstra[current];
         }
-        while (!path.empty()) {
+        while (!path.empty())
+        {
             cout << path.top();
             path.pop();
-            if (!path.empty()) {
+            if (!path.empty())
+            {
                 cout << " -> ";
             }
         }

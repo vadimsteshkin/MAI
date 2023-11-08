@@ -104,7 +104,7 @@ int main()
 	{
 		int data2[n];
 		unsigned __int64  start= __rdtsc();
-	
+
 		dataGeneratorsIntPartly[i](FNAME2[i], n, min, max, interval, data2);
 		unsigned __int64  end= __rdtsc();
         double duration = double(end - start) / 1000000000;
@@ -134,7 +134,7 @@ int main()
 
 int Rand_Num(const char* FNAME, int n, int min, int max, int* data1)
 {
-	
+
 	ofstream fout(FNAME);
 	srand(time(NULL));
 	cout << "Случайная последовательность" << endl;

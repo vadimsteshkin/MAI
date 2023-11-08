@@ -9,10 +9,10 @@
 
 #pragma intrinsic(__rdtsc)
 
-
 using namespace std;
 
-int betterlinerSearch(const vector<int>& arr, int key, int& comparisons, int& comparisons_i) {
+int betterlinerSearch(const vector<int>& arr, int key, int& comparisons, int& comparisons_i)
+{
     int size=arr.size();
 	for (int i = 0; i < size; i++) //Цикл алгоритма поиска
 	{
@@ -26,13 +26,13 @@ int betterlinerSearch(const vector<int>& arr, int key, int& comparisons, int& co
 		{
 			comparisons++;
 		}
-    
     }
     return 0;
 }
 
-int linearSearch(const vector<int>& arr, int key, int& comparisons) {
-    vector<int> arrCopy = arr; 
+int linearSearch(const vector<int>& arr, int key, int& comparisons)
+{
+    vector<int> arrCopy = arr;
     int size = arrCopy.size();
     int last = arrCopy[size - 1]; // Последнее значение
     arrCopy[size - 1] = key; // Значение последнего члена массива
@@ -50,14 +50,14 @@ int linearSearch(const vector<int>& arr, int key, int& comparisons) {
     return -1;
 }
 
-int ordinaryArraySearch(const vector<int>& arr, int key) 
+int ordinaryArraySearch(const vector<int>& arr, int key)
 {
     vector<int> arrCopy = arr;
     int size=arr.size();
     int last = arrCopy[size - 1];//Последнее значение
 	arrCopy[size - 1] = LLONG_MAX;
 	int i = 0;//Индекс
-	while (key > arr[i])//Сравнение элемента массива с ключом 
+	while (key > arr[i])//Сравнение элемента массива с ключом
 	{
 		i++;
 	}
@@ -73,18 +73,21 @@ int ordinaryArraySearch(const vector<int>& arr, int key)
     return -1;
 }
 
-int binarySearchSorted(const vector<int>& arr, int key) 
+int binarySearchSorted(const vector<int>& arr, int key)
 {
     int left = 0;
     int right = arr.size() - 1;
-    
-    while (left <= right) {
+    while (left <= right)
+    {
         int mid = left + (right - left) / 2;
-        if (arr[mid] == key) {
+        if (arr[mid] == key)
+        {
             return mid;
-        } else if (arr[mid] < key) {
+        } else if (arr[mid] < key)
+        {
             left = mid + 1;
-        } else {
+        } else
+        {
             right = mid - 1;
         }
     }
@@ -93,12 +96,14 @@ int binarySearchSorted(const vector<int>& arr, int key)
     return -1;
 }
 
-int main() {
+int main()
+{
     srand(time(0));
     vector<int> sortedArray;
     vector<int> unsortedArray;
 
-    for (int i = 0; i < 200000; i++) {
+    for (int i = 0; i < 200000; i++)
+    {
         int num = rand();
         sortedArray.push_back(num);
         unsortedArray.push_back(num);
@@ -112,7 +117,7 @@ int main() {
     for (int key=0; key<3; key++)
     {
         cout<<"Для ключа в индексе: "<<keys[key]<<endl;
-        for (int i = 0; i < 10; i++) 
+        for (int i = 0; i < 10; i++)
         {
             int size = sizes[i];
             vector<int> subArray(sortedArray.begin(), sortedArray.begin() + size);
@@ -144,7 +149,6 @@ int main() {
             unsigned __int64  endOAS= __rdtsc();
             double durationOAS = double(endOAS - startOAS) / 10000000;
 
-            
             unsigned __int64  startBS= __rdtsc();
             int resultBS = binarySearchSorted(subArray, keys[key]);
             unsigned __int64  endBS= __rdtsc();

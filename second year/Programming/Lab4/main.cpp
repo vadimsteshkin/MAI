@@ -1,9 +1,10 @@
 #include <iostream>
 #include <string>
 
-using namespace std; // Используем пространство имен std
+using namespace std;
 
-class Node {
+class Node
+{
     char value;
     Node* next;
     Node* prev;
@@ -11,7 +12,8 @@ class Node {
     Node(char val) : value(val), next(nullptr), prev(nullptr) {}
 };
 
-class CircularDoublyLinkedList {
+class CircularDoublyLinkedList
+{
     Node* head;
     Node* tail;
 
@@ -21,14 +23,17 @@ class CircularDoublyLinkedList {
         return head == nullptr;
     }
 
-    void append(char value) {
+    void append(char value)
+    {
         Node* newNode = new Node(value);
-        if (isEmpty()) {
+        if (isEmpty())
+        {
             head = newNode;
             tail = newNode;
             head->next = tail;
             head->prev = tail;
-        } else {
+        } else
+        {
             newNode->next = head;
             newNode->prev = tail;
             tail->next = newNode;
@@ -39,9 +44,11 @@ class CircularDoublyLinkedList {
 
     void insertAtBeginning(char value) {
         Node* newNode = new Node(value);
-        if (isEmpty()) {
+        if (isEmpty())
+        {
             append(value);
-        } else {
+        } else
+        {
             newNode->next = head;
             newNode->prev = tail;
             tail->next = newNode;
