@@ -18,10 +18,9 @@ void printArray(vector<int>& arr)
     }
     cout<<endl;
 }
-void shellSort(vector<int>& arr, int& comparisons)
+void shellSort(vector<int>& arr, int& comparisons,int n)
 {
-    cout<<"Сортировка Шелла"<<endl;
-    int n = arr.size();
+    //cout<<"Сортировка Шелла"<<endl;
     int gap = n / 2;
 
     while (gap > 0)
@@ -40,17 +39,15 @@ void shellSort(vector<int>& arr, int& comparisons)
             comparisons++;
 
             arr[j] = temp;
-            printArray(arr);
+            //printArray(arr);
         }
         gap /= 2;
     }
-    printArray(arr);
+    //printArray(arr);
 }
 
-void cocktailSort(vector<int>& arr, long long& comparisons)
+void cocktailSort(vector<int>& arr, long long& comparisons, int n)
 {
-    int n = arr.size();
-    cout<<"Коктельная сортировка"<<endl;
     bool swapped = true;
     int start = 0;
     int end = n - 1;
@@ -66,7 +63,7 @@ void cocktailSort(vector<int>& arr, long long& comparisons)
             {
                 swap(arr[i], arr[i + 1]);
                 swapped = true;
-                printArray(arr);
+                //printArray(arr);
             }
         }
         if (!swapped)
@@ -83,7 +80,7 @@ void cocktailSort(vector<int>& arr, long long& comparisons)
             {
                 swap(arr[i], arr[i - 1]);
                 swapped = true;
-                printArray(arr);
+                //printArray(arr);
             }
         }
         start++;
@@ -93,8 +90,8 @@ void cocktailSort(vector<int>& arr, long long& comparisons)
 
 int main()
 {
-    vector<int> lengths={10};
-    //vector<int> lengths={1000, 10000, 50000, 100000 };
+    //vector<int> lengths={20};
+    vector<int> lengths={1000, 10000, 50000, 100000 };
     for (int j=0;j<lengths.size();j++)
     {
         int n=lengths[j];
@@ -113,8 +110,8 @@ int main()
         sort(sortedArray.begin(), sortedArray.end());
         sort(reverseSortedArray.begin(), reverseSortedArray.end(),greater<>());
 
-        cout<<"Массив"<<endl;
-        printArray(reverseSortedArray);
+        //cout<<"Массив"<<endl;
+        //printArray(reverseSortedArray);
 
         vector<int> ArrayCopy = Array;
         vector<int> sortedArrayCopy = sortedArray;
@@ -122,19 +119,19 @@ int main()
 
         long long comparisonsCS = 0;
         unsigned __int64  startCS= __rdtsc();
-        cocktailSort(ArrayCopy, comparisonsCS);
+        cocktailSort(ArrayCopy, comparisonsCS,n);
         unsigned __int64  endCS= __rdtsc();
         double durationCS = double(endCS - startCS) / 10000000000;
 
         long long comparisonsSCS = 0;
         unsigned __int64  startSCS= __rdtsc();
-        cocktailSort(sortedArrayCopy,comparisonsSCS);
+        cocktailSort(sortedArrayCopy,comparisonsSCS,n);
         unsigned __int64  endSCS= __rdtsc();
         double durationSCS = double(endSCS - startSCS) / 10000000000;
 
         long long comparisonsRCS = 0;
         unsigned __int64  startRCS= __rdtsc();
-        cocktailSort(reverseSortedArrayCopy,comparisonsRCS);
+        cocktailSort(reverseSortedArrayCopy,comparisonsRCS,n);
         unsigned __int64  endRCS= __rdtsc();
         double durationRCS = double(endRCS - startRCS) / 10000000000;
 
@@ -145,19 +142,19 @@ int main()
 
         int comparisonsSS = 0;
         unsigned __int64  startSS= __rdtsc();
-        shellSort(ArrayCopyC,comparisonsSS);
+        shellSort(ArrayCopyC,comparisonsSS,n);
         unsigned __int64  endSS= __rdtsc();
         double durationSS = double(endSS - startSS) / 10000000000;
 
         int comparisonsSSS = 0;
         unsigned __int64  startSSS= __rdtsc();
-        shellSort(sortedArrayCopyC,comparisonsSSS);
+        shellSort(sortedArrayCopyC,comparisonsSSS,n);
         unsigned __int64  endSSS= __rdtsc();
         double durationSSS = double(endSSS - startSSS) / 10000000000;
 
         int comparisonsRSS = 0;
         unsigned __int64  startRSS= __rdtsc();
-        shellSort(reverseSortedArrayCopyC,comparisonsRSS);
+        shellSort(reverseSortedArrayCopyC,comparisonsRSS,n);
         unsigned __int64  endRSS= __rdtsc();
         double durationRSS = double(endRSS - startRSS) / 10000000000;
 
@@ -168,5 +165,5 @@ int main()
         cout<<"Время Шейкерной сортировки на отсортированном массиве при длине  "<<n<<" равно "<<durationSCS<<fixed<<" Сравнения: "<<comparisonsSCS<<endl;
         cout<<"Время Шейкерной сортировки отсортированном по убыванию массиве при длине "<<n<<" равно "<<durationRCS<<fixed<<" Сравнения: "<<comparisonsRCS<<endl;
     }
-return 0;
+    return 0;
 }

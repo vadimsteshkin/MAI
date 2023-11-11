@@ -1,39 +1,40 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
+// Класс узла списка
+class Node {
+public:
+    char value;    // Значение узла
+    Node* next;    // Указатель на следующий узел
+    Node* prev;    // Указатель на предыдущий узел
 
-class Node
-{
-    char value;
-    Node* next;
-    Node* prev;
-
+    // Конструктор узла
     Node(char val) : value(val), next(nullptr), prev(nullptr) {}
 };
 
-class CircularDoublyLinkedList
-{
-    Node* head;
-    Node* tail;
+// Класс двунаправленного кольцевого символьного списка
+class CircularDoublyLinkedList {
+private:
+    Node* head;  // Указатель на начало списка
+    Node* tail;  // Указатель на конец списка
 
+public:
     CircularDoublyLinkedList() : head(nullptr), tail(nullptr) {}
 
+    // Проверка, пуст ли список
     bool isEmpty() {
         return head == nullptr;
     }
 
-    void append(char value)
-    {
+    // Добавление элемента в конец списка
+    void append(char value) {
         Node* newNode = new Node(value);
-        if (isEmpty())
-        {
+        if (isEmpty()) {
             head = newNode;
             tail = newNode;
             head->next = tail;
             head->prev = tail;
-        } else
-        {
+        } else {
             newNode->next = head;
             newNode->prev = tail;
             tail->next = newNode;
@@ -42,13 +43,12 @@ class CircularDoublyLinkedList
         }
     }
 
+    // Добавление элемента в начало списка
     void insertAtBeginning(char value) {
         Node* newNode = new Node(value);
-        if (isEmpty())
-        {
+        if (isEmpty()) {
             append(value);
-        } else
-        {
+        } else {
             newNode->next = head;
             newNode->prev = tail;
             tail->next = newNode;
@@ -57,9 +57,10 @@ class CircularDoublyLinkedList
         }
     }
 
+    // Вставка элемента на заданную позицию
     void insertAtPosition(char value, int position) {
         if (position < 0) {
-            cout << "Invalid position" << endl;
+            std::cout << "Невозможная позиция" << std::endl;
             return;
         }
         if (position == 0) {
@@ -73,7 +74,7 @@ class CircularDoublyLinkedList
                 count++;
             }
             if (count < position) {
-                cout << "Position out of range" << endl;
+                std::cout << "Вы вышли за список" << std::endl;
                 return;
             }
             newNode->next = current;
@@ -83,9 +84,10 @@ class CircularDoublyLinkedList
         }
     }
 
+    // Удаление элемента с начала списка
     void removeAtBeginning() {
         if (isEmpty()) {
-            cout << "List is empty, cannot remove." << endl;
+            std::cout << "Список пуст" << std::endl;
             return;
         }
         if (head == tail) {
@@ -101,20 +103,22 @@ class CircularDoublyLinkedList
         }
     }
 
+    // Вывод списка на экран
     void printList() {
         if (isEmpty()) {
-            cout << "List is empty." << endl;
+            std::cout << "Список пуст." << std::endl;
             return;
         }
         Node* current = head;
         int index = 0;
         do {
-            cout << "Element at index " << index << ": " << current->value << endl;
+            std::cout << "Значение в индексе " << index << ": " << current->value << std::endl;
             current = current->next;
             index++;
         } while (current != head);
     }
 
+    // Деструктор для освобождения памяти
     ~CircularDoublyLinkedList() {
         while (!isEmpty()) {
             removeAtBeginning();
