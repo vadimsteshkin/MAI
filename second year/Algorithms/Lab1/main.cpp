@@ -38,17 +38,25 @@ void unionSets(std::vector<int>& parent, int x, int y) {
     parent[xroot] = yroot;
 }
 
-// Алгоритм Дейкстры для поиска кратчайшего пути
+/* Алгоритм Дейкстры для поиска кратчайшего пути от одной вершины ко всем осталным.
+ * В каждой итерации выбирается вершина с наименьшим расстоянием, а затем обновляются
+ * расстояния до её соседей. Это повторяется до тех пор, пока все вершины не будут посещены.
+ * @param graph Матрица смежности графа.
+ * @param start Начальная вершина.
+ */
 void dijkstra(const std::vector<std::vector<int>>& graph, int start) {
+
     int n = graph.size();
-    std::vector<int> distance(n, INF);
-    std::vector<bool> visited(n, false);
+    std::vector<int> distance(n, INF);   // Массив для хранения расстояний от начальной вершины
+    std::vector<bool> visited(n, false); // Массив для отслеживания посещенных вершин
 
     distance[start] = 0;
 
+    // Основной цикл алгоритма Дейкстры
     for (int i = 0; i < n - 1; ++i) {
         int minDist = INF, minIndex = -1;
 
+        // Находим вершину с минимальным расстоянием
         for (int j = 0; j < n; ++j) {
             if (!visited[j] && distance[j] < minDist) {
                 minDist = distance[j];
@@ -58,6 +66,7 @@ void dijkstra(const std::vector<std::vector<int>>& graph, int start) {
 
         visited[minIndex] = true;
 
+        // Обновляем расстояния до смежных вершин
         for (int j = 0; j < n; ++j) {
             if (!visited[j] && graph[minIndex][j] != INF &&
                 distance[minIndex] != INF &&
@@ -74,15 +83,23 @@ void dijkstra(const std::vector<std::vector<int>>& graph, int start) {
     }
 }
 
-// Алгоритм Беллмана-Форда для поиска кратчайшего пути
+/**
+ * Алгоритм Беллмана-Форда находит кратчайшие пути от заданной начальной вершины ко всем остальным.
+ * Он релаксирует рёбра в графе V-1 раз, где V - количество вершин. Затем проверяется наличие
+ * циклов отрицательного веса.
+ * @param graph Матрица смежности графа.
+ * @param start Начальная вершина.
+ */
 void bellmanFord(const std::vector<std::vector<int>>& graph, int start) {
     int n = graph.size();
-    std::vector<int> distance(n, INF);
+    std::vector<int> distance(n, INF); // Массив для хранения расстояний от начальной вершины
     distance[start] = 0;
 
+    // Основной цикл алгоритма Беллмана-Форда
     for (int i = 0; i < n - 1; ++i) {
         for (int u = 0; u < n; ++u) {
             for (int v = 0; v < n; ++v) {
+                // Релаксация ребра (обновление расстояния)
                 if (graph[u][v] != INF && distance[u] != INF &&
                     distance[u] + graph[u][v] < distance[v]) {
                     distance[v] = distance[u] + graph[u][v];
@@ -109,11 +126,16 @@ void bellmanFord(const std::vector<std::vector<int>>& graph, int start) {
     }
 }
 
-// Алгоритм Флойда-Уоршелла для поиска кратчайших путей
+/**
+ * Алгоритм Флойда-Уоршелла находит кратчайшие пути между всеми парами вершин в графе.
+ * Используется тройной вложенный цикл для обновления расстояний между всеми парами вершин.
+ * @param graph Матрица смежности графа.
+ */
 void floydWarshall(const std::vector<std::vector<int>>& graph) {
     int n = graph.size();
     std::vector<std::vector<int>> distance(graph);
 
+    // Основной цикл алгоритма Флойда-Уоршелла
     for (int k = 0; k < n; ++k) {
         for (int i = 0; i < n; ++i) {
             for (int j = 0; j < n; ++j) {
@@ -140,7 +162,12 @@ void floydWarshall(const std::vector<std::vector<int>>& graph) {
     }
 }
 
-// Алгоритм Крускала для построения остовного дерева минимальной стоимости
+/**
+ * Алгоритм Крускала строит остовное дерево минимальной стоимости, добавляя рёбра в порядке
+ *возрастания их весов и не создавая циклов. Для этого используется система непересекающихся
+ * множеств (Union-Find).
+ * @param graph Матрица смежности графа.
+ */
 void kruskal(const std::vector<std::vector<int>>& graph) {
     int V = graph.size();
     std::vector<int> parent(V, -1); // Инициализация массива предков
@@ -173,15 +200,20 @@ void kruskal(const std::vector<std::vector<int>>& graph) {
     }
 }
 
-// Алгоритм Прима для построения остовного дерева минимальной стоимости
+/**
+ * Алгоритм Прима строит остовное дерево минимальной стоимости, добавляя к текущему дереву
+ * вершину с минимальным весом ребра, соединяющего текущее дерево с ещё не включенными вершинами.
+ * @param graph Матрица смежности графа.
+ */
 void prim(const std::vector<std::vector<int>>& graph) {
     int V = graph.size();
-    std::vector<int> parent(V, -1); // Инициализация массива предков
-    std::vector<int> key(V, INF);    // Веса вершин
-    std::vector<bool> inMST(V, false); // Включена ли вершина в остовное дерево
+    std::vector<int> parent(V, -1);    // Инициализация массива предков
+    std::vector<int> key(V, INF);       // Веса вершин
+    std::vector<bool> inMST(V, false);  // Включена ли вершина в остовное дерево
 
     key[0] = 0; // Начинаем с вершины 0
 
+    // Основной цикл алгоритма Прима
     for (int count = 0; count < V - 1; ++count) {
         int u = -1;
         for (int v = 0; v < V; ++v) {
@@ -192,6 +224,7 @@ void prim(const std::vector<std::vector<int>>& graph) {
 
         inMST[u] = true;
 
+        // Обновляем ключи для смежных вершин
         for (int v = 0; v < V; ++v) {
             if (graph[u][v] != INF && !inMST[v] && graph[u][v] < key[v]) {
                 parent[v] = u;
@@ -206,11 +239,22 @@ void prim(const std::vector<std::vector<int>>& graph) {
         std::cout << "Ребро " << parent[i] << " - " << i << " : " << graph[i][parent[i]] << std::endl;
     }
 }
-
 int main() {
     const int V = 5; // Количество вершин
     setlocale(LC_ALL, "RUSSIAN");
     // Пример матрицы смежности (INF - отсутствие ребра)
+    std::vector<std::vector<int>> graph = {
+    {INF, 3, INF, INF, 7, INF, INF, INF, INF, INF},
+    {3, INF, 2, INF, INF, INF, INF, INF, INF, INF},
+    {INF, 2, INF, 5, INF, INF, INF, INF, INF, INF},
+    {INF, INF, 5, INF, INF, 4, INF, INF, INF, INF},
+    {7, INF, INF, INF, INF, INF, 1, INF, INF, INF},
+    {INF, INF, INF, 4, INF, INF, 6, 2, INF, INF},
+    {INF, INF, INF, INF, 1, 6, INF, INF, INF, INF},
+    {INF, INF, INF, INF, INF, 2, INF, INF, 3, INF},
+    {INF, INF, INF, INF, INF, INF, INF, 3, INF, 4},
+    {INF, INF, INF, INF, INF, INF, INF, INF, 4, INF}
+    };
     std::vector<std::vector<int>> graph = {
         {INF, 2, INF, 1, INF},
         {2, INF, 4, 3, INF},
