@@ -204,11 +204,11 @@ int main() {
 
         // Вывод результатов
         cout << "Результаты для массива длины " << n << ":" << endl;
-        cout << "Шелла: Время - " << durationSS << " секунд, Сравнения - " << comparisonsSS << ", Пересылки - " << swapsSS << endl;
-        cout << "Шелла (отсортированный): Время - " << durationSSS << " секунд, Сравнения - " << comparisonsSSS << ", Пересылки - " << swapsSSS << endl;
-        cout << "Шелла (обратно отсортированный): Время - " << durationRSS << " секунд, Сравнения - " << comparisonsRSS << ", Пересылки - " << swapsRSS << endl;
-        cout << "Шейкер: Время - " << durationCS << " секунд, Сравнения - " << comparisonsCS << ", Пересылки - " << swapsCS << endl;
-        cout << "Шейкер (отсортированный): Время - " << durationSCS << " секунд, Сравнения - " << comparisonsSCS << ", Пересылки - " << swapsSCS << endl;
+        cout << "Шелла: Время - " << durationSS << fixed<< " секунд, Сравнения - " << comparisonsSS << ", Пересылки - " << swapsSS << endl;
+        cout << "Шелла (отсортированный): Время - " << durationSSS << fixed<< " секунд, Сравнения - " << comparisonsSSS << ", Пересылки - " << swapsSSS << endl;
+        cout << "Шелла (обратно отсортированный): Время - " << durationRSS << fixed<< " секунд, Сравнения - " << comparisonsRSS << ", Пересылки - " << swapsRSS << endl;
+        cout << "Шейкер: Время - " << durationCS <<fixed<< " секунд, Сравнения - " << comparisonsCS << ", Пересылки - " << swapsCS << endl;
+        cout << "Шейкер (отсортированный): Время - " << durationSCS << fixed <<" секунд, Сравнения - " << comparisonsSCS << ", Пересылки - " << swapsSCS << endl;
         cout << "Шейкер (обратно отсортированный): Время - " << durationRCS << " секунд, Сравнения - " << comparisonsRCS << ", Пересылки - " << swapsRCS << endl;
         cout << "--------------------------------------" << endl;
     }
