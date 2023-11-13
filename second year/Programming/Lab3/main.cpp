@@ -46,8 +46,8 @@ void shellSort(vector<int>& arr, long long& comparisons, long long& swaps, int n
             while (j >= gap && arr[j - gap] > temp) {
                 comparisons++;
                 swaps++;
-                cout<<"Сортировка Шелла с шагом "<<gap<<": Поменялись значения "<<arr[i]<<" и "<<arr[j-gap]<<endl;
-                printArray(arr);
+                /*cout<<"Сортировка Шелла с шагом "<<gap<<": Поменялись значения "<<arr[i]<<" и "<<arr[j-gap]<<endl;
+                printArray(arr);*/
 
                 arr[j] = arr[j - gap];
                 j -= gap;
@@ -81,7 +81,6 @@ void cocktailSort(vector<int>& arr, long long& comparisons, long long& swaps, in
 
     while (swapped) {
         swapped = false;
-        
         for (int i = start; i < end; i++) {
             comparisons++;
             if (arr[i] > arr[i + 1]) {
@@ -91,8 +90,8 @@ void cocktailSort(vector<int>& arr, long long& comparisons, long long& swaps, in
                 arr[i + 1] = temp;
                 swapped = true;
                 swaps++;
-                cout<<"Коктельная сортировка: Поменялись значения "<<arr[i]<<" и "<<temp<<endl;
-                printArray(arr);
+                /*cout<<"Коктельная сортировка: Поменялись значения "<<arr[i]<<" и "<<temp<<endl;
+                printArray(arr);*/
             }
         }
 
@@ -112,8 +111,8 @@ void cocktailSort(vector<int>& arr, long long& comparisons, long long& swaps, in
                 arr[i - 1] = temp;
                 swapped = true;
                 swaps++;
-                cout<<"Коктельная сортировка в обратную сторону: Поменялись значения "<<arr[i]<<" и "<<temp<<endl;
-                printArray(arr);
+               /* cout<<"Коктельная сортировка в обратную сторону: Поменялись значения "<<arr[i]<<" и "<<temp<<endl;
+                printArray(arr);*/
             }
         }
         start++;
@@ -122,8 +121,8 @@ void cocktailSort(vector<int>& arr, long long& comparisons, long long& swaps, in
 
 int main() {
     // Заданные длины массивов для сортировки
-    //vector<int> lengths = {1000, 10000, 50000, 100000};
-    vector<int> lengths = {15};
+    vector<int> lengths = {1000, 10000, 50000, 100000};
+    //vector<int> lengths = {15};
 
     // Итерация по заданным длинам массивов
     for (int j = 0; j < lengths.size(); j++) {
@@ -135,7 +134,7 @@ int main() {
         vector<int> sortedArray;
         vector<int> reverseSortedArray;
 
-        cout<<"Массив"<<endl;
+        
 
         // Заполнение массивов случайными числами
         for (int i = 0; i < n; i++) {
@@ -144,8 +143,10 @@ int main() {
             sortedArray.push_back(num);
             reverseSortedArray.push_back(num);
         }
+        
+        /*cout<<"Массив"<<endl;
+        printArray(Array);*/
 
-        printArray(Array);
         // Сортировка массивов для сравнения с отсортированными и в обратном порядке
         sort(sortedArray.begin(), sortedArray.end());
         sort(reverseSortedArray.begin(), reverseSortedArray.end(), greater<>());
