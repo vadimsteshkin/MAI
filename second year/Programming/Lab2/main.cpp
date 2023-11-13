@@ -3,7 +3,6 @@
 #include <cstdlib>
 #include <vector>
 #include <algorithm>
-#include <chrono>
 #include <stdio.h>
 #include <intrin.h>
 
@@ -11,7 +10,7 @@
 
 using namespace std;
 
-int betterlinerSearch(const vector<int>& arr, int key, int& comparisons, int& comparisons_i)
+int linearSearch(const vector<int>& arr, int key, int& comparisons, int& comparisons_i)
 {
     int size=arr.size();
 	for (int i = 0; i < size; i++) //Цикл алгоритма поиска
@@ -30,7 +29,7 @@ int betterlinerSearch(const vector<int>& arr, int key, int& comparisons, int& co
     return 0;
 }
 
-int linearSearch(const vector<int>& arr, int key, int& comparisons)
+int betterlinearSearch(const vector<int>& arr, int key, int& comparisons)
 {
     vector<int> arrCopy = arr;
     int size = arrCopy.size();
@@ -126,7 +125,7 @@ int main()
             int comparisonsBLS = 0;
             int comparisonsBLS_i = 0;
             unsigned __int64  startBLS= __rdtsc();
-            int resultBLS = betterlinerSearch(unsortedArray, keys[key], comparisonsBLS, comparisonsBLS_i);
+            int resultBLS = linearSearch(unsortedArray, keys[key], comparisonsBLS, comparisonsBLS_i);
             cout << "Индекс равен: " << resultBLS << endl;
 			cout << "Кол-во сравнений с ключом: " << comparisonsBLS<< endl;
 			cout << "Кол-во сравнений в цикле: " <<  comparisonsBLS_i<< endl;
@@ -137,7 +136,7 @@ int main()
             int comparisonsSLS = 0;
             int comparisonsSLS_i = 0;
             unsigned __int64  startSLS= __rdtsc();
-            int resultSLS = linearSearch(unsortedArray, keys[key], comparisonsSLS);
+            int resultSLS = betterlinearSearch(unsortedArray, keys[key], comparisonsSLS);
             cout << "Индекс равен: " << resultSLS << endl;
             unsigned __int64  endSLS= __rdtsc();
             double durationSLS = double(endSLS - startSLS) / 10000000;

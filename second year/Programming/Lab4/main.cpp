@@ -35,7 +35,8 @@ public:
 
     /**
      * @brief Деструктор класса CircularDoublyLinkedList.
-     * @details Освобождает память, выделенную для узлов списка, вызывая метод removeAtBeginning() до тех пор, пока список не станет пустым.
+     * @details Освобождает память, выделенную для узлов списка,
+     * вызывая метод removeAtBeginning() до тех пор, пока список не станет пустым.
      */
     ~CircularDoublyLinkedList() {
         while (!isEmpty()) {
@@ -231,14 +232,21 @@ int main() {
     myList.append('A');
     myList.append('B');
     myList.append('C');
-    myList.insertAtBeginning('Z');
-    myList.insertAtPosition('X', 2);
+    std::cout << "Список после добавления элементов: \n";
+    myList.printList();
+    std::cout<<"Введите значение для добавление в начало списка \n";
+    char startValue;
+    std::cin>>startValue;
+    myList.insertAtBeginning(startValue);
+    //myList.insertAtPosition('X', 2);
     // Вывод списка
     std::cout << "Список после вставок:" << std::endl;
     myList.printList();
 
     // Поиск элемента
-    char searchValue = 'f';
+    char searchValue;
+    std::cout<<"Введите ключ для поиска \n";
+    std::cin>>searchValue;
     std::cout<<"Поиск элемента : "<<searchValue<<'\n';
     int foundIndex = myList.findElement(searchValue);
     if (foundIndex != -1) {
@@ -249,7 +257,9 @@ int main() {
     }
 
     // Удаление элемента по позиции
-    int removePosition = 1;
+    int removePosition;
+    std::cout<<"Введите индекс для удаления \n";
+    std::cin >> removePosition;
     myList.removeAtPosition(removePosition);
 
     // Вывод списка после удаления

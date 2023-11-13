@@ -10,7 +10,7 @@ using namespace std;
 
 /**
  * @brief Выводит элементы массива на экран.
- * 
+ *
  * @param arr Массив, который нужно вывести.
  */
 void printArray(vector<int>& arr) {
@@ -22,17 +22,17 @@ void printArray(vector<int>& arr) {
 
 /**
  * @brief Реализация сортировки Шелла с подсчетом числа сравнений и пересылок.
- * 
+ *
  * @param arr Массив, который нужно отсортировать.
  * @param comparisons Счетчик числа сравнений.
  * @param swaps Счетчик числа пересылок.
  * @param n Размер массива.
- * 
+ *
  * @details Сортировка Шелла является методом усовершенствованной сортировки вставками.
  * Основная идея заключается в том, чтобы сначала сравнивать и сортировать элементы,
  * находящиеся на некотором фиксированном расстоянии друг от друга (шаге).
  * Процесс повторяется с новыми значениями шага до тех пор, пока шаг не станет равным 1.
- * 
+ *
  * @note Сортировка Шелла хорошо справляется с частично упорядоченными массивами.
  */
 void shellSort(vector<int>& arr, long long& comparisons, long long& swaps, int n) {
@@ -46,10 +46,9 @@ void shellSort(vector<int>& arr, long long& comparisons, long long& swaps, int n
             while (j >= gap && arr[j - gap] > temp) {
                 comparisons++;
                 swaps++;
-                /*cout<<"Сортировка Шелла с шагом "<<gap<<": Поменялись значения "<<arr[i]<<" и "<<arr[j-gap]<<endl;
-                printArray(arr);*/
-
                 arr[j] = arr[j - gap];
+                /*cout<<"Сортировка Шелла с шагом "<<gap<<": Поменялись значения "<<arr[i]<<" и "<<arr[j]<<endl;
+                printArray(arr);*/
                 j -= gap;
             }
             comparisons++;
@@ -61,8 +60,7 @@ void shellSort(vector<int>& arr, long long& comparisons, long long& swaps, int n
 }
 
 /**
- * @brief Реализация Шейкерной сортировки с подсчетом числа сравнений и пересылок.
- * 
+ * @brief Реализация Шейкерной сортировки с подсчетом числа сравнений и пересылок. 
  * @param arr Массив, который нужно отсортировать.
  * @param comparisons Счетчик числа сравнений.
  * @param swaps Счетчик числа пересылок.
@@ -90,8 +88,8 @@ void cocktailSort(vector<int>& arr, long long& comparisons, long long& swaps, in
                 arr[i + 1] = temp;
                 swapped = true;
                 swaps++;
-                /*cout<<"Коктельная сортировка: Поменялись значения "<<arr[i]<<" и "<<temp<<endl;
-                printArray(arr);*/
+                //cout<<"Коктельная сортировка: Поменялись значения "<<arr[i]<<" и "<<temp<<endl;
+                //printArray(arr);
             }
         }
 
@@ -134,7 +132,6 @@ int main() {
         vector<int> sortedArray;
         vector<int> reverseSortedArray;
 
-        
 
         // Заполнение массивов случайными числами
         for (int i = 0; i < n; i++) {
@@ -143,7 +140,7 @@ int main() {
             sortedArray.push_back(num);
             reverseSortedArray.push_back(num);
         }
-        
+
         /*cout<<"Массив"<<endl;
         printArray(Array);*/
 
