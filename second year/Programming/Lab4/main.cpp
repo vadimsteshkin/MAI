@@ -223,48 +223,111 @@ public:
             index++;
         } while (current != head);
     }
+    void clear() 
+    {
+    while (!isEmpty()) 
+    {
+        removeAtBeginning();
+    }
+    }
 };
 
+/**
+ * @brief Функция для взаимодействия с пользователем через меню.
+ * @param myList Ссылка на объект CircularDoublyLinkedList для выполнения операций.
+ */
+void menu(CircularDoublyLinkedList& myList) {
+    int choice;
+    do {
+        // Вывод меню
+        std::cout << "\nВыберите операцию:" << std::endl;
+        std::cout << "1. Добавить элемент в конец списка" << std::endl;
+        std::cout << "2. Добавить элемент в начало списка" << std::endl;
+        std::cout << "3. Вставить элемент на заданную позицию" << std::endl;
+        std::cout << "4. Удалить элемент с начала списка" << std::endl;
+        std::cout << "5. Удалить элемент по заданной позиции" << std::endl;
+        std::cout << "6. Найти элемент в списке" << std::endl;
+        std::cout << "7. Вывести список" << std::endl;
+        std::cout << "8. Очистить список" << std::endl;
+        std::cout << "0. Выйти из программы" << std::endl;
+        std::cout << "Введите номер операции: ";
+        
+        // Ввод выбора пользователя
+        std::cin >> choice;
+
+        switch (choice) {
+            case 1: {
+                char value;
+                std::cout << "Введите значение для добавления в конец списка: ";
+                std::cin >> value;
+                myList.append(value);
+                break;
+            }
+            case 2: {
+                char value;
+                std::cout << "Введите значение для добавления в начало списка: ";
+                std::cin >> value;
+                myList.insertAtBeginning(value);
+                break;
+            }
+            case 3: {
+                char value;
+                int position;
+                std::cout << "Введите значение для вставки: ";
+                std::cin >> value;
+                std::cout << "Введите позицию для вставки: ";
+                std::cin >> position;
+                myList.insertAtPosition(value, position);
+                break;
+            }
+            case 4:
+                myList.removeAtBeginning();
+                break;
+            case 5: {
+                int position;
+                std::cout << "Введите позицию для удаления: ";
+                std::cin >> position;
+                myList.removeAtPosition(position);
+                break;
+            }
+            case 6: {
+                char searchValue;
+                std::cout << "Введите значение для поиска: ";
+                std::cin >> searchValue;
+                int foundIndex = myList.findElement(searchValue);
+                if (foundIndex != -1) {
+                    std::cout << "Элемент '" << searchValue << "' найден в индексе: " << foundIndex << std::endl;
+                } else {
+                    std::cout << "Элемент: " << searchValue << " не найден" << std::endl;
+                }
+                break;
+            }
+            case 7:
+                std::cout << "Список:" << std::endl;
+                myList.printList();
+                break;
+            case 8:
+                myList.clear();
+                std::cout << "Список очищен." << std::endl;
+                break;
+            case 0:
+                std::cout << "Выход из программы." << std::endl;
+                break;
+            default:
+                std::cout << "Неверный выбор. Попробуйте еще раз." << std::endl;
+        }
+    } while (choice != 0);
+}
+
 int main() {
+    setlocale(LC_ALL, "");
     CircularDoublyLinkedList myList;
-    std::cout << "Список: ";
-    myList.printList();
-    myList.append('A');
-    myList.append('B');
-    myList.append('C');
-    std::cout << "Список после добавления элементов: \n";
-    myList.printList();
-    std::cout<<"Введите значение для добавление в начало списка \n";
-    char startValue;
-    std::cin>>startValue;
-    myList.insertAtBeginning(startValue);
-    //myList.insertAtPosition('X', 2);
-    // Вывод списка
-    std::cout << "Список после вставок:" << std::endl;
-    myList.printList();
-
-    // Поиск элемента
-    char searchValue;
-    std::cout<<"Введите ключ для поиска \n";
-    std::cin>>searchValue;
-    std::cout<<"Поиск элемента : "<<searchValue<<'\n';
-    int foundIndex = myList.findElement(searchValue);
-    if (foundIndex != -1) {
-        std::cout << "Элемент '" << searchValue << "' найден в индексе: " << foundIndex << std::endl;
+    for (char ch = 'A'; ch <= 'T'; ++ch) {
+        myList.append(ch);
     }
-    else{
-        std::cout<<"Элемент: "<<searchValue<<" не найден"<<'\n';
-    }
-
-    // Удаление элемента по позиции
-    int removePosition;
-    std::cout<<"Введите индекс для удаления \n";
-    std::cin >> removePosition;
-    myList.removeAtPosition(removePosition);
-
-    // Вывод списка после удаления
-    std::cout << "Список после удаления с позиции "<<removePosition<<": " << std::endl;
-    myList.printList();
+    // Вызов функции меню для взаимодействия с пользователем
+    menu(myList);
 
     return 0;
 }
+

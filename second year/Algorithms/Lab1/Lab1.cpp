@@ -303,13 +303,13 @@ int main()
         {INF, INF, INF, INF, INF, 2, INF, INF, 3, INF},
         {INF, INF, INF, INF, INF, INF, INF, 3, INF, 4},
         {INF, INF, INF, INF, INF, INF, INF, INF, 4, INF}};
-    std::vector<std::vector<int>> graph = {
+    /*std::vector<std::vector<int>> graph = {
         {INF, 2, INF, 1, INF},
         {2, INF, 4, 3, INF},
         {INF, 4, INF, INF, 5},
         {1, 3, INF, INF, 7},
         {INF, INF, 5, 7, INF}};
-
+        */
     // Вывод матрицы смежности
     std::cout << "Матрица смежности:\n";
     printMatrix(graph);

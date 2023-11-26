@@ -14,3 +14,22 @@ tempCodeRunnerFile.cpp
 *.bin
 *.db
 Introduction to professional activity/Laboratory works/.project
+*.sqlite
+*.wsuo
+*.config
+*.ipch
+*.vcxproj
+*.user
+*.filters
+*.vsidx
+*.suo
+*.tlog
+*.sln
+*.idb
+*.pdb
+*.obj
+*.db-wal
+*.db-shm
+*.opendb
+*.recipe
+*.ilk
