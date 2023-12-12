@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <string>
 
 /**
@@ -65,7 +65,8 @@ public:
             tail = newNode;
             head->next = tail;
             head->prev = tail;
-        } else {
+        }
+        else {
             newNode->next = head;
             newNode->prev = tail;
             tail->next = newNode;
@@ -84,7 +85,8 @@ public:
         Node* newNode = new Node(value);
         if (isEmpty()) {
             append(value);
-        } else {
+        }
+        else {
             newNode->next = head;
             newNode->prev = tail;
             tail->next = newNode;
@@ -107,7 +109,8 @@ public:
         }
         if (position == 0) {
             insertAtBeginning(value);
-        } else {
+        }
+        else {
             Node* newNode = new Node(value);
             Node* current = head;
             int count = 0;
@@ -141,7 +144,8 @@ public:
             delete head;
             head = nullptr;
             tail = nullptr;
-        } else {
+        }
+        else {
             Node* newHead = head->next;
             newHead->prev = tail;
             tail->next = newHead;
@@ -164,7 +168,8 @@ public:
         }
         if (position == 0) {
             removeAtBeginning();
-        } else {
+        }
+        else {
             Node* current = head;
             int count = 0;
             while (current && count < position) {
@@ -223,18 +228,14 @@ public:
             index++;
         } while (current != head);
     }
-    /**
-     * @brief Освобождает память, выделенную для узлов списка.
-     * @details Вызывает метод removeAtBeginning() до тех пор, пока список не станет пустым.
-     */
-    void clear() {
-        while (!isEmpty()) {
+    void clear()
+    {
+        while (!isEmpty())
+        {
             removeAtBeginning();
         }
-}
-
+    }
 };
-
 
 /**
  * @brief Функция для взаимодействия с пользователем через меню.
@@ -255,70 +256,71 @@ void menu(CircularDoublyLinkedList& myList) {
         std::cout << "8. Очистить список" << std::endl;
         std::cout << "0. Выйти из программы" << std::endl;
         std::cout << "Введите номер операции: ";
-        
+
         // Ввод выбора пользователя
         std::cin >> choice;
 
         switch (choice) {
-            case 1: {
-                char value;
-                std::cout << "Введите значение для добавления в конец списка: ";
-                std::cin >> value;
-                myList.append(value);
-                break;
+        case 1: {
+            char value;
+            std::cout << "Введите значение для добавления в конец списка: ";
+            std::cin >> value;
+            myList.append(value);
+            break;
+        }
+        case 2: {
+            char value;
+            std::cout << "Введите значение для добавления в начало списка: ";
+            std::cin >> value;
+            myList.insertAtBeginning(value);
+            break;
+        }
+        case 3: {
+            char value;
+            int position;
+            std::cout << "Введите значение для вставки: ";
+            std::cin >> value;
+            std::cout << "Введите позицию для вставки: ";
+            std::cin >> position;
+            myList.insertAtPosition(value, position);
+            break;
+        }
+        case 4:
+            myList.removeAtBeginning();
+            break;
+        case 5: {
+            int position;
+            std::cout << "Введите позицию для удаления: ";
+            std::cin >> position;
+            myList.removeAtPosition(position);
+            break;
+        }
+        case 6: {
+            char searchValue;
+            std::cout << "Введите значение для поиска: ";
+            std::cin >> searchValue;
+            int foundIndex = myList.findElement(searchValue);
+            if (foundIndex != -1) {
+                std::cout << "Элемент '" << searchValue << "' найден в индексе: " << foundIndex << std::endl;
             }
-            case 2: {
-                char value;
-                std::cout << "Введите значение для добавления в начало списка: ";
-                std::cin >> value;
-                myList.insertAtBeginning(value);
-                break;
+            else {
+                std::cout << "Элемент: " << searchValue << " не найден" << std::endl;
             }
-            case 3: {
-                char value;
-                int position;
-                std::cout << "Введите значение для вставки: ";
-                std::cin >> value;
-                std::cout << "Введите позицию для вставки: ";
-                std::cin >> position;
-                myList.insertAtPosition(value, position);
-                break;
-            }
-            case 4:
-                myList.removeAtBeginning();
-                break;
-            case 5: {
-                int position;
-                std::cout << "Введите позицию для удаления: ";
-                std::cin >> position;
-                myList.removeAtPosition(position);
-                break;
-            }
-            case 6: {
-                char searchValue;
-                std::cout << "Введите значение для поиска: ";
-                std::cin >> searchValue;
-                int foundIndex = myList.findElement(searchValue);
-                if (foundIndex != -1) {
-                    std::cout << "Элемент '" << searchValue << "' найден в индексе: " << foundIndex << std::endl;
-                } else {
-                    std::cout << "Элемент: " << searchValue << " не найден" << std::endl;
-                }
-                break;
-            }
-            case 7:
-                std::cout << "Список:" << std::endl;
-                myList.printList();
-                break;
-            case 8:
-                myList.clear();
-                std::cout << "Список очищен." << std::endl;
-                break;
-            case 0:
-                std::cout << "Выход из программы." << std::endl;
-                break;
-            default:
-                std::cout << "Неверный выбор. Попробуйте еще раз." << std::endl;
+            break;
+        }
+        case 7:
+            std::cout << "Список:" << std::endl;
+            myList.printList();
+            break;
+        case 8:
+            myList.clear();
+            std::cout << "Список очищен." << std::endl;
+            break;
+        case 0:
+            std::cout << "Выход из программы." << std::endl;
+            break;
+        default:
+            std::cout << "Неверный выбор. Попробуйте еще раз." << std::endl;
         }
     } while (choice != 0);
 }
@@ -326,12 +328,12 @@ void menu(CircularDoublyLinkedList& myList) {
 int main() {
     setlocale(LC_ALL, "");
     CircularDoublyLinkedList myList;
-     for (char ch = 'A'; ch <= 'T'; ++ch) {
+    for (char ch = 'A'; ch <= 'T'; ++ch) {
         myList.append(ch);
     }
-
     // Вызов функции меню для взаимодействия с пользователем
     menu(myList);
 
     return 0;
 }
+

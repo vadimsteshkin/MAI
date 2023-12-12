@@ -1,14 +1,15 @@
-﻿#include <iostream>
+#include <iostream>
 #include <vector>
 #include <limits>
 #include <algorithm>
+#define DEBUG
 
 const int INF = std::numeric_limits<int>::max();
 
 // Функция для отображения матрицы смежности
-void printMatrix(const std::vector<std::vector<int>>& matrix)
+void printMatrix(const std::vector<std::vector<int>> &matrix)
 {
-    for (const auto& row : matrix)
+    for (const auto &row : matrix)
     {
         for (int weight : row)
         {
@@ -26,13 +27,13 @@ void printMatrix(const std::vector<std::vector<int>>& matrix)
 }
 
 // Функция для сравнения ребер по весу
-bool compareEdges(const std::pair<int, std::pair<int, int>>& a, const std::pair<int, std::pair<int, int>>& b)
+bool compareEdges(const std::pair<int, std::pair<int, int>> &a, const std::pair<int, std::pair<int, int>> &b)
 {
     return a.first < b.first;
 }
 
 // Функция для поиска подмножества вершины i
-int find(std::vector<int>& parent, int i)
+int find(std::vector<int> &parent, int i)
 {
     if (parent[i] == -1)
         return i;
@@ -40,7 +41,7 @@ int find(std::vector<int>& parent, int i)
 }
 
 // Функция объединения двух подмножеств в одно подмножество
-void unionSets(std::vector<int>& parent, int x, int y)
+void unionSets(std::vector<int> &parent, int x, int y)
 {
     int xroot = find(parent, x);
     int yroot = find(parent, y);
@@ -53,7 +54,7 @@ void unionSets(std::vector<int>& parent, int x, int y)
  * @param graph Матрица смежности графа.
  * @param start Начальная вершина.
  */
-void dijkstra(const std::vector<std::vector<int>>& graph, int start)
+void dijkstra(const std::vector<std::vector<int>> &graph, int start)
 {
 
     int n = graph.size();
@@ -106,7 +107,7 @@ void dijkstra(const std::vector<std::vector<int>>& graph, int start)
  * @param graph Матрица смежности графа.
  * @param start Начальная вершина.
  */
-void bellmanFord(const std::vector<std::vector<int>>& graph, int start)
+void bellmanFord(const std::vector<std::vector<int>> &graph, int start)
 {
     int n = graph.size();
     std::vector<int> distance(n, INF); // Массив для хранения расстояний от начальной вершины
@@ -144,7 +145,7 @@ void bellmanFord(const std::vector<std::vector<int>>& graph, int start)
     }
 
     // Вывод результатов
-    std::cout << "Минимальное расстояние(Беллман-Форд) " << start << ":\n";
+    std::cout << "Минимальное связующее дерево(Беллман-Форд) " << start << ":\n";
     for (int i = 0; i < n; ++i)
     {
         std::cout << "Вершина " << i << ": Расстояние = " << distance[i] << std::endl;
@@ -156,7 +157,7 @@ void bellmanFord(const std::vector<std::vector<int>>& graph, int start)
  * Используется тройной вложенный цикл для обновления расстояний между всеми парами вершин.
  * @param graph Матрица смежности графа.
  */
-void floydWarshall(const std::vector<std::vector<int>>& graph)
+void floydWarshall(const std::vector<std::vector<int>> &graph)
 {
     int n = graph.size();
     std::vector<std::vector<int>> distance(graph);
@@ -178,7 +179,7 @@ void floydWarshall(const std::vector<std::vector<int>>& graph)
     }
 
     // Вывод результатов
-    std::cout << "Минимальное расстояние(алгоритм Флойда-Уоршелла):\n";
+    std::cout << "Минимальное связующее дерево(алгоритм Флойда-Уоршелла):\n";
     for (int i = 0; i < n; ++i)
     {
         for (int j = 0; j < n; ++j)
@@ -203,7 +204,7 @@ void floydWarshall(const std::vector<std::vector<int>>& graph)
  * множеств (Union-Find).
  * @param graph Матрица смежности графа.
  */
-void kruskal(const std::vector<std::vector<int>>& graph)
+void kruskal(const std::vector<std::vector<int>> &graph)
 {
     int V = graph.size();
     std::vector<int> parent(V, -1); // Инициализация массива предков
@@ -217,7 +218,7 @@ void kruskal(const std::vector<std::vector<int>>& graph)
         {
             if (graph[i][j] != INF)
             {
-                edges.push_back({ graph[i][j], {i, j} });
+                edges.push_back({graph[i][j], {i, j}});
             }
         }
     }
@@ -226,7 +227,7 @@ void kruskal(const std::vector<std::vector<int>>& graph)
     std::sort(edges.begin(), edges.end(), compareEdges);
 
     std::cout << "Минимальное связующее дерево (Алгоритм Крускала):\n";
-    for (const auto& edge : edges)
+    for (const auto &edge : edges)
     {
         int x = find(parent, edge.second.first);
         int y = find(parent, edge.second.second);
@@ -235,7 +236,7 @@ void kruskal(const std::vector<std::vector<int>>& graph)
         if (x != y)
         {
             std::cout << "Ребро " << edge.second.first << " - " << edge.second.second
-                << " : " << edge.first << std::endl;
+                      << " : " << edge.first << std::endl;
             unionSets(parent, x, y);
         }
     }
@@ -246,7 +247,7 @@ void kruskal(const std::vector<std::vector<int>>& graph)
  * вершину с минимальным весом ребра, соединяющего текущее дерево с ещё не включенными вершинами.
  * @param graph Матрица смежности графа.
  */
-void prim(const std::vector<std::vector<int>>& graph)
+void prim(const std::vector<std::vector<int>> &graph)
 {
     int V = graph.size();
     std::vector<int> parent(V, -1);    // Инициализация массива предков
@@ -292,7 +293,6 @@ int main()
     const int V = 5; // Количество вершин
     setlocale(LC_ALL, "RUSSIAN");
     // Пример матрицы смежности (INF - отсутствие ребра)
-    /*
     std::vector<std::vector<int>> graph = {
         {INF, 3, INF, INF, 7, INF, INF, INF, INF, INF},
         {3, INF, 2, INF, INF, INF, INF, INF, INF, INF},
@@ -303,69 +303,27 @@ int main()
         {INF, INF, INF, INF, 1, 6, INF, INF, INF, INF},
         {INF, INF, INF, INF, INF, 2, INF, INF, 3, INF},
         {INF, INF, INF, INF, INF, INF, INF, 3, INF, 4},
-        {INF, INF, INF, INF, INF, INF, INF, INF, 4, INF} };
-        */
+        {INF, INF, INF, INF, INF, INF, INF, INF, 4, INF}};
+    #ifdef DEBUG
     std::vector<std::vector<int>> graph = {
-      // 0    1  2   3   4
-        {INF, 2, 5, INF, INF},//0
-        {INF, INF, 1, INF, INF},//1
-        {INF, INF, INF, 3, INF},//2
-        {INF, INF, INF, INF, 5},//3
-        {8, INF, INF, INF, INF} };//4
-    std::vector<std::vector<int>> directedGraphWithNegativeEdges = {
-        {INF, 3, INF, -1, INF},
-        {INF, INF, INF, -3, 2},
-        {INF, 4, INF, INF, 7},
-        {INF, INF, 5, INF, INF},
-        {INF, INF, INF, -2, INF}};
-
-    std::vector<std::vector<int>> directedGraphWithNegativeCycle = {
-        {INF, 3, INF, -1, INF},
-        {INF, INF, INF, -3, 2},
-        {INF, 4, INF, INF, 7},
-        {INF, INF, 5, INF, INF},
-        {-1, INF, INF, -13, INF} }; // Добавлен отрицательный цикл: 4 -> 3 ->2-> 4
-
-    std::vector<std::vector<int>> undirectedGraph = {
-        {INF, 1, INF, 5, 4},
-        {1, INF, INF, 1, 7},
-        {INF, INF, INF, 4, 3},
-        {5, 1, 4, INF, INF},
-        {4, 7, 3, 7, INF} };  
-
-
-    // Ориентированный граф без отрицательных рёбер
-    std::cout << "--------------------------------------------------------------\n";
-    std::cout << "Матрица смежности графа без отрицательных рёбер:\n";
+        {INF, 2, INF, 1, INF},
+        {2, INF, 4, 3, INF},
+        {INF, 4, INF, INF, 5},
+        {1, 3, INF, INF, 7},
+        {INF, INF, 5, 7, INF}};
+    #endif
+    // Вывод матрицы смежности
+    std::cout << "Матрица смежности:\n";
     printMatrix(graph);
+
+    // Применение алгоритмов поиска кратчайшего пути
     dijkstra(graph, 0);
     bellmanFord(graph, 0);
     floydWarshall(graph);
 
-    //Ориентированный граф с отрицательными ребрами
-    std::cout << "--------------------------------------------------------------\n";
-    std::cout << "Матрица смежности графа с отрицательными ребрами:\n";
-    printMatrix(directedGraphWithNegativeEdges);
-    bellmanFord(directedGraphWithNegativeEdges, 0);
-    floydWarshall(directedGraphWithNegativeEdges);
-
-    //Ориентированный граф с отрицательными циклами
-    std::cout << "--------------------------------------------------------------\n";
-    std::cout << "Матрица смежности графа с отрицательными циклами:\n";
-    printMatrix(directedGraphWithNegativeCycle);
-    bellmanFord(directedGraphWithNegativeCycle, 0);
-    floydWarshall(directedGraphWithNegativeCycle);
-
     // Применение алгоритмов построения остовного дерева
-    std::cout << "--------------------------------------------------------------\n";
-    std::cout << "Матрица смежности для применения алгоритмов построения остовного дерева:\n";
-    printMatrix(undirectedGraph);
-
-    // Крускал
-    kruskal(undirectedGraph);
-
-    // Прим
-    prim(undirectedGraph);
+    kruskal(graph);
+    prim(graph);
 
     return 0;
 }
